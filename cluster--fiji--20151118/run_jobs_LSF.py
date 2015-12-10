@@ -42,7 +42,7 @@ if __name__ == '__main__':
         parser = argparse.ArgumentParser(
                     description='Running all LSF jobs in one directory.')
         parser.add_argument('--job_dir', dest='job_dir', default='')
-        parser.add_argument('--bsub_options', dest='bsub_options', default='') # bsub -q intelavx
+        parser.add_argument('--bsub_options', dest='bsub_options', default='') # this is not good as it cannot be known by the resubmission script! better put as #BSUB in the job.sh scripts
 
         args = parser.parse_args()
          

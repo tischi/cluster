@@ -38,7 +38,20 @@ def ensure_empty_dir(path):
         os.mkdir(path)
 
  
-def make_jobs(xvfb, software, script, input_dir, output_dir, batch_size, max_jobs, memory):    
+#def make_jobs(xvfb, software, script, input_dir, output_dir, batch_size, max_jobs, memory, queue, host_group):    
+def make_jobs(args):
+    
+    # how to make this nicer?
+    xvfb = args.xvfb
+    software = args.software
+    script = args.script
+    input_dir = args.input_dir 
+    output_dir = args.output_dir
+    batch_size = args.batch_size
+    max_jobs = args.max_jobs
+    memory = args.memory
+    queue = args.queue
+    host_group = args.host_group    
    
     print ''
     print 'make_jobs_LSF:'
@@ -57,9 +70,6 @@ def make_jobs(xvfb, software, script, input_dir, output_dir, batch_size, max_job
     ensure_empty_dir(log_dir)
     ensure_empty_dir(job_dir)
 
-    # create job files
-    
-    
     #
     # get files or folders to analyze
     #
@@ -68,7 +78,7 @@ def make_jobs(xvfb, software, script, input_dir, output_dir, batch_size, max_job
     #for root, directories, filenames in os.walk(input_dir):
     #  print "sub folders:", directories
     for file_or_folder in files_or_folders:
-      if not ("humbs.db" in file_or_folder):
+      if not (("humbs.db" or ".DS_store") in file_or_folder):
         files_or_folders_for_analysis.append(file_or_folder)
 
     nJobs = len(files_or_folders_for_analysis)
@@ -92,6 +102,18 @@ def make_jobs(xvfb, software, script, input_dir, output_dir, batch_size, max_job
         txt = txt + '\n'
         script_file.write(txt)
 
+
+        if queue:
+          script_file.write(
+            '#BSUB -q {}\n'.format(queue)
+          )        
+          
+        if host_group:
+          script_file.write(
+            '#BSUB -m {}\n'.format(host_group)
+          )        
+
+        
         script_file.write(
             'echo "starting job"\n'
         )        
@@ -170,18 +192,23 @@ if __name__ == '__main__':
                             default=-1)
         parser.add_argument('--max_jobs', dest='max_jobs', type=int,
                             default=NUM_JOBS_MAX)
+        parser.add_argument('--queue', dest='queue', default='') # bigmem
+        parser.add_argument('--host_group', dest='host_group', default='') # intelavx
+            
+                            
         args = parser.parse_args()
-
+       
         # create the jobs
-        job_dir, nJobs = make_jobs(args.xvfb, args.software, args.script, args.input_dir, args.output_dir, args.batch_size, args.max_jobs, args.memory)
-
+        #job_dir, nJobs = make_jobs(args.xvfb, args.software, args.script, args.input_dir, args.output_dir, args.batch_size, args.max_jobs, args.memory, args.queue, args.host_group)
+        job_dir, nJobs = make_jobs(args)
+        
         # print some information about the jobs
         print ''
         print 'Number of jobs:',nJobs
         print 'Job directory:',job_dir
         print ''
         print 'Command to spawn jobs on cluster:'
-        print 'python-2.7 /g/almf/software/scripts/cluster/cluster--fiji--20151118/run_jobs_LSF.py --job_dir',job_dir,' --bsub_options "-q bigmem"'
+        print 'python-2.7 /g/almf/software/scripts/cluster/cluster--fiji--20151118/run_jobs_LSF.py --job_dir',job_dir
         print ''
     
     except:
