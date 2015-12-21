@@ -45,6 +45,7 @@ def make_jobs(args):
     xvfb = args.xvfb
     software = args.software
     script = args.script
+    script_arguments = args.script_arguments
     input_dir = args.input_dir 
     output_dir = args.output_dir
     batch_size = args.batch_size
@@ -149,15 +150,21 @@ def make_jobs(args):
         ## examples
         ##   software: "ImageJ-linux64 -macro"
         ##   script: "
-        def make_command(xvfb, software, script, input_file):
+        def make_command(xvfb, software, script, script_arguments):
             cmd = [xvfb,
                 software,
                 script,
-                input_file
+                script_arguments
             ]
             return ' '.join(cmd)
-      
-        cmd = make_command(xvfb, software, script, os.path.join(input_dir, files_or_folders_for_analysis[iJob]))
+
+        #print script_arguments
+        software_with_quotation = r'"{}"'.format(software)
+        script_with_quotation = r'"{}"'.format(script)
+        script_arguments__input_file = r'"{} {}"'.format(script_arguments, os.path.join(input_dir, files_or_folders_for_analysis[iJob]))
+        #print script_arguments__input_file
+        
+        cmd = make_command(xvfb, software_with_quotation, script_with_quotation, script_arguments__input_file)
         script_file.write(cmd + '\n')
 
         script_file.write(
@@ -185,6 +192,7 @@ if __name__ == '__main__':
         parser.add_argument('--xvfb', dest='xvfb', default='')            
         parser.add_argument('--software', dest='software', default='')
         parser.add_argument('--script', dest='script', default='')
+        parser.add_argument('--script_arguments', dest='script_arguments', default='')
         parser.add_argument('--input_dir', dest='input_dir', default='')
         parser.add_argument('--output_dir', dest='output_dir', default='')
         parser.add_argument('--memory', dest='memory', default='8000')
@@ -194,6 +202,7 @@ if __name__ == '__main__':
                             default=NUM_JOBS_MAX)
         parser.add_argument('--queue', dest='queue', default='') # bigmem
         parser.add_argument('--host_group', dest='host_group', default='') # intelavx
+        
             
                             
         args = parser.parse_args()

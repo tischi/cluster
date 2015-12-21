@@ -1,0 +1,5 @@
+# fiji script with 2 arguments:
+python-2.7 /g/almf/software/scripts/cluster/cluster--fiji--20151118/make_jobs_LSF.py --host_group intelavx --memory 16000 --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script "/g/almf/software/scripts/cluster/cluster--fiji--20151118/test--cluster/macro_with_arguments.ijm" --script_arguments "arg1 arg2" --input_dir /g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data
+
+# fiji script without arguments
+python-2.7 /g/almf/software/scripts/cluster/cluster--fiji--20151118/make_jobs_LSF.py --host_group intelavx --memory 16000 --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script "/g/almf/software/scripts/cluster/cluster--fiji--20151118/test--cluster/macro_with_arguments.ijm" --input_dir /g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data
