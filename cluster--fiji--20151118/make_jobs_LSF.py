@@ -78,10 +78,15 @@ def make_jobs(args):
     files_or_folders = os.listdir(input_dir)
     #for root, directories, filenames in os.walk(input_dir):
     #  print "sub folders:", directories
+    print "\nChecking {} input files...".format(len(files_or_folders))
     for file_or_folder in files_or_folders:
-      if not (("humbs.db" or ".DS_store") in file_or_folder):
+      if ("DS_Store" in file_or_folder):
+        print "Skipping .DS_Store"
+      elif ("humbs.db" in file_or_folder):
+        print "Skipping Thumbs.db"
+      else:
         files_or_folders_for_analysis.append(file_or_folder)
-
+      
     nJobs = len(files_or_folders_for_analysis)
     
     for iJob in range(nJobs):
@@ -161,10 +166,13 @@ def make_jobs(args):
         #print script_arguments
         software_with_quotation = r'"{}"'.format(software)
         script_with_quotation = r'"{}"'.format(script)
-        script_arguments__input_file = r'"{} {}"'.format(script_arguments, os.path.join(input_dir, files_or_folders_for_analysis[iJob]))
-        #print script_arguments__input_file
+        if script_arguments:
+          script_arguments__input_file = r'"{} {}"'.format(script_arguments, os.path.join(input_dir, files_or_folders_for_analysis[iJob]))
+        else: # otherwise one gets an " " (space) in front of the input file
+          script_arguments__input_file = r'"{}"'.format(os.path.join(input_dir, files_or_folders_for_analysis[iJob]))
         
-        cmd = make_command(xvfb, software_with_quotation, script_with_quotation, script_arguments__input_file)
+        # using software without quotation as it does not work with
+        cmd = make_command(xvfb, software, script_with_quotation, script_arguments__input_file)
         script_file.write(cmd + '\n')
 
         script_file.write(
@@ -201,7 +209,7 @@ if __name__ == '__main__':
         parser.add_argument('--max_jobs', dest='max_jobs', type=int,
                             default=NUM_JOBS_MAX)
         parser.add_argument('--queue', dest='queue', default='') # bigmem
-        parser.add_argument('--host_group', dest='host_group', default='') # intelavx
+        parser.add_argument('--host_group', dest='host_group', default='intelavx') # intelavx
         
             
                             
