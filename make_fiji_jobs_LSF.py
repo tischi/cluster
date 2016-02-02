@@ -47,9 +47,9 @@ def make_jobs(args):
     script = args.script
     script_arguments = args.script_arguments
     input_dir = args.input_dir 
-    output_dir = args.output_dir
-    batch_size = args.batch_size
-    max_jobs = args.max_jobs
+    #output_dir = args.output_dir
+    #batch_size = args.batch_size
+    #max_jobs = args.max_jobs
     memory = args.memory
     queue = args.queue
     host_group = args.host_group    
@@ -197,45 +197,49 @@ if __name__ == '__main__':
     ''' example calls:
     python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --xvfb "xvfb-run -a" --host_group intelavx --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script /g/arendt/PrImR/PrImR48/Scripts/LifExt_Split.ijm --input_dir /g/arendt/PrImR/PrImR48/0lif/
     '''
-    
-    try:
 
-        # parse arguments
-        parser = argparse.ArgumentParser(
-                    description='Make LSF jobs.')
-        parser.add_argument('--xvfb', dest='xvfb', default='')            
-        parser.add_argument('--software', dest='software', default='')
-        parser.add_argument('--script', dest='script', default='')
-        parser.add_argument('--script_arguments', dest='script_arguments', default='')
-        parser.add_argument('--input_dir', dest='input_dir', default='')
-        parser.add_argument('--output_dir', dest='output_dir', default='')
-        parser.add_argument('--memory', dest='memory', default='8000')
-        parser.add_argument('--batch_size', dest='batch_size', type=int,
-                            default=-1)
-        parser.add_argument('--max_jobs', dest='max_jobs', type=int,
-                            default=NUM_JOBS_MAX)
-        parser.add_argument('--queue', dest='queue', default='') # bigmem
-        parser.add_argument('--host_group', dest='host_group', default='intelavx') # intelavx
-                        
-        args = parser.parse_args()
-       
-        # create the jobs
-        #job_dir, nJobs = make_jobs(args.xvfb, args.software, args.script, args.input_dir, args.output_dir, args.batch_size, args.max_jobs, args.memory, args.queue, args.host_group)
-        job_dir, nJobs = make_jobs(args)
-        
-        # print some information about the jobs
-        print ''
-        print 'Number of jobs:',nJobs
-        print 'Job directory:',job_dir
-        print ''
-        print 'Command to spawn jobs on cluster:'
-        print 'python-2.7 /g/almf/software/scripts/cluster/run_jobs_LSF.py --job_dir',job_dir
-        print ''
+    description = '''
+    Prepares LSF jobs for running Fiji scripts on each file (or folder) in the input_dir. 
+    For each job one file will be stored in an automatically generated folder, 
+    which will have the name of your --input_dir + "--cluster/jobs". It is very instructive to inspect the job files, which are simple text, e.g. to determine sources of errors.
+    Once job generation is finished this script will print a command to run the jobs (using run_jobs_LSF.py);
+    you may simply copy and paste this command and press enter to execute it.
+    '''
     
-    except:
-        import traceback
-        traceback.print_exc()
-        exit_code = -1
-        
-    finally:
-        print ""
+    # parse arguments
+    parser = argparse.ArgumentParser(description=description, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('--software', dest='software', default='/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch',
+                        help='(required) full path to your fiji installation, including options for running it.')
+    parser.add_argument('--input_dir', dest='input_dir', default='',
+                        help='(required) full path to the folder containing the data to be analyzed.')
+    parser.add_argument('--script', dest='script', default='',
+                        help='(required) full path to the fiji script that you want to run.')
+    parser.add_argument('--script_arguments', dest='script_arguments', default='',
+                        help='arguments/options that your script takes (in addition to the file/folder to be analyzed, which will be determined from the --input_dir for each job automatically.)')
+    parser.add_argument('--xvfb', dest='xvfb', default='"xvfb-run -a"', 
+                        help='specify software providing a virtual frame buffer; this is necessary to handle possible graphics output of fiji.')            
+    #parser.add_argument('--output_dir', dest='output_dir', default='')
+    parser.add_argument('--memory', dest='memory', default='16000',
+                        help='memory that you want to allocate on the cluster node in MB.')
+    #parser.add_argument('--batch_size', dest='batch_size', type=int, default=-1)
+    #parser.add_argument('--max_jobs', dest='max_jobs', type=int,
+    #                    default=NUM_JOBS_MAX)
+    parser.add_argument('--queue', dest='queue', default='',
+                        help='select a specific queue to submit your jobs to; this selects a subset of the available nodes with specific properties, e.g. "bigmem" selects nodes with a lot of memory.') # bigmem
+    parser.add_argument('--host_group', dest='host_group', default='intelavx',
+                           help='select a specific group of nodes to submit your jobs to.') 
+                    
+    args = parser.parse_args()
+   
+    # create the jobs
+    #job_dir, nJobs = make_jobs(args.xvfb, args.software, args.script, args.input_dir, args.output_dir, args.batch_size, args.max_jobs, args.memory, args.queue, args.host_group)
+    job_dir, nJobs = make_jobs(args)
+    
+    # print some information about the jobs
+    print ''
+    print 'Number of jobs:',nJobs
+    print 'Job directory:',job_dir
+    print ''
+    print 'Command to spawn jobs on cluster:'
+    print 'python-2.7 /g/almf/software/scripts/cluster/run_jobs_LSF.py --job_dir',job_dir
+    print ''
