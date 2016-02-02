@@ -1,0 +1,134 @@
+Sender: LSF System <phpcadmin@computef-124>
+Subject: Job 180953: <#!/bin/bash;#BSUB -oo "/g/almf/software/scripts/cluster/matlab/devel/job_1--out.txt";#BSUB -eo "/g/almf/software/scripts/cluster/matlab/devel/job_1--err.txt";#BSUB -M 8000;#BSUB -R select[mem>8000] -R rusage[mem=8000]; echo $LD_LIBRARY_PATH;echo ""; # matlab runtime libraries;MCRROOT=/g/software/linux/pack/matlab_runtime-8.3/bin/v83 ;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/runtime/glnxa64;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/bin/glnxa64;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/os/glnxa64;# LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/opengl/lib/glnxa64;export LD_LIBRARY_PATH; XAPPLRESDIR=/g/software/linux/pack/matlab_runtime-8.3/bin/v83/X11/app-defaults;export XAPPLRESDIR; echo $LD_LIBRARY_PATH; echo "starting job";touch "/g/almf/software/scripts/cluster/matlab/devel/job_test--started.touch"; # run the code;/scratch/Nils/LFdeconvolution/test1/main_reconstruct_single /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif /scratch/Nils/LFdeconvolution/test1/output /scratch/Nils/PSF_40x095NAair.mat 1269.7 1082.05 22.645 is_first_frame  1> in cluster <phpc_cluster> Done
+
+Job <#!/bin/bash;#BSUB -oo "/g/almf/software/scripts/cluster/matlab/devel/job_1--out.txt";#BSUB -eo "/g/almf/software/scripts/cluster/matlab/devel/job_1--err.txt";#BSUB -M 8000;#BSUB -R select[mem>8000] -R rusage[mem=8000]; echo $LD_LIBRARY_PATH;echo ""; # matlab runtime libraries;MCRROOT=/g/software/linux/pack/matlab_runtime-8.3/bin/v83 ;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/runtime/glnxa64;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/bin/glnxa64;LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/os/glnxa64;# LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/opengl/lib/glnxa64;export LD_LIBRARY_PATH; XAPPLRESDIR=/g/software/linux/pack/matlab_runtime-8.3/bin/v83/X11/app-defaults;export XAPPLRESDIR; echo $LD_LIBRARY_PATH; echo "starting job";touch "/g/almf/software/scripts/cluster/matlab/devel/job_test--started.touch"; # run the code;/scratch/Nils/LFdeconvolution/test1/main_reconstruct_single /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif /scratch/Nils/LFdeconvolution/test1/output /scratch/Nils/PSF_40x095NAair.mat 1269.7 1082.05 22.645 is_first_frame  1> was submitted from host <submaster1> by user <tischer> in cluster <phpc_cluster>.
+Job was executed on host(s) <computef-124>, in queue <medium_priority>, as user <tischer> in cluster <phpc_cluster>.
+</home/tischer> was used as the home directory.
+</g/almf/software/scripts/cluster/matlab/devel> was used as the working directory.
+Started at Fri Jan 29 11:36:21 2016
+Results reported on Fri Jan 29 12:24:03 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -oo "/g/almf/software/scripts/cluster/matlab/devel/job_1--out.txt"
+#BSUB -eo "/g/almf/software/scripts/cluster/matlab/devel/job_1--err.txt"
+#BSUB -M 8000
+#BSUB -R select[mem>8000] -R rusage[mem=8000]
+
+echo $LD_LIBRARY_PATH
+echo ""
+
+# matlab runtime libraries
+MCRROOT=/g/software/linux/pack/matlab_runtime-8.3/bin/v83 
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/runtime/glnxa64
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/bin/glnxa64
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/os/glnxa64
+# LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCRROOT}/sys/opengl/lib/glnxa64
+export LD_LIBRARY_PATH
+
+XAPPLRESDIR=/g/software/linux/pack/matlab_runtime-8.3/bin/v83/X11/app-defaults
+export XAPPLRESDIR
+
+echo $LD_LIBRARY_PATH
+
+echo "starting job"
+touch "/g/almf/software/scripts/cluster/matlab/devel/job_test--started.touch"
+
+# run the code
+/scratch/Nils/LFdeconvolution/test1/main_reconstruct_single /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif /scratch/Nils/LFdeconvolution/test1/output /scratch/Nils/PSF_40x095NAair.mat 1269.7 1082.05 22.645 is_first_frame  1
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   39869.82 sec.
+    Max Memory :                                 14382 MB
+    Average Memory :                             13381.59 MB
+    Total Requested Memory :                     8000.00 MB
+    Delta Memory :                               -6382.00 MB
+    Max Swap :                                   18587 MB
+    Max Processes :                              4
+    Max Threads :                                47
+
+The output (if any) follows:
+
+/shared/ibm/platform_lsf/9.1/linux2.6-glibc2.3-x86_64/lib
+
+/shared/ibm/platform_lsf/9.1/linux2.6-glibc2.3-x86_64/lib:/g/software/linux/pack/matlab_runtime-8.3/bin/v83/runtime/glnxa64:/g/software/linux/pack/matlab_runtime-8.3/bin/v83/bin/glnxa64:/g/software/linux/pack/matlab_runtime-8.3/bin/v83/sys/os/glnxa64
+starting job
+Evaluating ~/.matlab/my_startup/startup.m
+29-Jan-2016 11:36:34: Starting main_reconstruct_single
+Normalization constant file: /scratch/Nils/LFdeconvolution/test1/output/meta/normalization_constant.mat
+Output parameter file: /scratch/Nils/LFdeconvolution/test1/output/meta/input_and_derived_parameters.json
+All input and derived parameters: 
+                      crop: 0
+                cut_bottom: 0
+                  cut_left: 0
+                 cut_right: 0
+                   cut_top: 0
+                        dx: 22.6450
+                    infile: '/scratch/Nils/20151029_6dpf_40x_095NA_air_100...'
+    instance_nr_zero_based: 0
+            is_first_frame: 1
+      job_storage_location: ''
+       n_frames_per_worker: 1
+                    n_iter: 8
+        n_parallel_workers: 0
+                 n_threads: 1
+                 norm_file: ''
+                  offset_x: 1.2697e+03
+                  offset_y: 1.0820e+03
+            out_param_file: ''
+                    outdir: '/scratch/Nils/LFdeconvolution/test1/output'
+                   psffile: '/scratch/Nils/PSF_40x095NAair.mat'
+                   rectify: 1
+       save_all_iterations: 0
+                     start: 1
+                      step: 1
+                      stop: 0
+                   testing: 0
+        normalization_file: '/scratch/Nils/LFdeconvolution/test1/output/me...'
+     output_parameter_file: '/scratch/Nils/LFdeconvolution/test1/output/me...'
+
+Instance 0: Going to reconstruct frames [1] without parallel computing toolbox workers (but multithreaded according to parameters).
+Setting maximum number of compute threads to 1
+Warning: maxNumCompThreads will be removed in a future release. Please remove any instances of this function from your code.
+[> In maxNumCompThreads at 26
+  In main_reconstruct_single at 187] 
+Instance 0: Loading PSF from /scratch/Nils/PSF_40x095NAair.mat
+Input file:  /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+Output file: /scratch/Nils/LFdeconvolution/test1/output/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+29-Jan-2016 11:38:56: Loading /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+Input frame size: 2160  2560
+29-Jan-2016 11:38:59: Rectifying /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+Reconstruction input frame size: 1380  1635
+29-Jan-2016 11:39:00: Starting reconstruction of /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+Got PSF matrix of size: 451  451   15   15   31
+Projecting backwards...
+Starting RL deconvolution...
+  Iteration 1/8 took 317.9239 secs
+  Iteration 2/8 took 313.711 secs
+  Iteration 3/8 took 311.5229 secs
+  Iteration 4/8 took 310.8109 secs
+  Iteration 5/8 took 308.7882 secs
+  Iteration 6/8 took 321.3103 secs
+  Iteration 7/8 took 319.9424 secs
+  Iteration 8/8 took 312.6526 secs
+Saving new RenormConstant: 82650667.6304
+Max after normalization: 39321
+Writing reconstructed volume...
+29-Jan-2016 12:24:00: Done with reconstruction of /scratch/Nils/20151029_6dpf_40x_095NA_air_100ms_LED23_pos20_lowOxygen_1__T0.tif
+29-Jan-2016 12:24:00: Reconstruction complete.
+29-Jan-2016 12:24:00: Writing output parameter file
+29-Jan-2016 12:24:00: Returning.
+
+
+PS:
+
+Read file </g/almf/software/scripts/cluster/matlab/devel/job_1--err.txt> for stderr output of this job.
+

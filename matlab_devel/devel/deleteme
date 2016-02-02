@@ -1,0 +1,9 @@
+
+
+
+MCR_ROOT=/g/software/linux/pack/matlab_runtime-8.3/bin/v83 
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCR_ROOT}/runtime/glnxa64:${MCR_ROOT}/bin/glnxa64:${MCR_ROOT}/sys/os/glnxa64
+export LD_LIBRARY_PATH
+
+XAPPLRESDIR=/g/software/linux/pack/matlab_runtime-8.3/bin/v83/X11/app-defaults
+export XAPPLRESDIR
