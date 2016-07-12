@@ -107,7 +107,7 @@ optional arguments:
 
 The scripts are hosted on: /g/almf/software/scripts/cluster
 
-### Example of calling cluster-fiji at EMBL Heidelberg
+### Example of calling fiji scripts on the cluster at EMBL Heidelberg
 
 - log onto submaster1
   - open terminal (on mac: in-built; on windows: install cygwin)   
