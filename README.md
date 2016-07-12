@@ -117,7 +117,7 @@ The scripts are hosted on: /g/almf/software/scripts/cluster
   - to start it type for instance:
      ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script /g/my_group/my_script.ijm --input_dir /g/my_group/my_folder_with_data/```
 
-#### Specific call for the data in the example folder
+#### Specific call for data in fiji_devel/examples folder
 
 ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --memory 16000 --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" --input_dir "/g/almf/software/scripts/cluster/fiji_devel/examples/data"```
 
