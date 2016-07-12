@@ -100,7 +100,7 @@ optional arguments:
                         memory. (default: )  
   --host_group HOST_GROUP  
                         select a specific group of nodes to submit your jobs
-                        to. (default: intelavx)  
+                        to. (default: fujitsu)  
 
 
 ## EMBL specific information
@@ -115,5 +115,9 @@ The scripts are hosted on: /g/almf/software/scripts/cluster
   - to get help type:
      ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --help```
   - to start it type for instance:
-     ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --xvfb "xvfb-run -a" --host_group fujitsu --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script /g/my_group/my_script.ijm --input_dir /g/my_group/my_folder_with_data/```
+     ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script /g/my_group/my_script.ijm --input_dir /g/my_group/my_folder_with_data/```
+
+#### Specific call for the data in the example folder
+
+```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --memory 16000 --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" --input_dir``` "/g/almf/software/scripts/cluster/fiji_devel/examples/data"
 
