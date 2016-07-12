@@ -102,3 +102,18 @@ optional arguments:
                         select a specific group of nodes to submit your jobs
                         to. (default: intelavx)  
 
+
+## EMBL specific information
+
+The scripts are hosted on: /g/almf/software/scripts/cluster
+
+### Example of calling cluster-fiji at EMBL Heidelberg
+
+- log onto submaster1
+  - open terminal (on mac: in-built; on windows: install cygwin)   
+  - ssh username@submaster1 
+  - to get help type:
+     ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --help```
+  - to start it type for instance:
+     ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --xvfb "xvfb-run -a" --host_group fujitsu --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script /g/my_group/my_script.ijm --input_dir /g/my_group/my_folder_with_data/```
+
