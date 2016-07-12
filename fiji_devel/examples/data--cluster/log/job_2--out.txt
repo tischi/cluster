@@ -1,0 +1,61 @@
+Sender: LSF System <phpcadmin@computef-017>
+Subject: Job 538058: <#!/bin/bash;#BSUB -oo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--out.txt";#BSUB -eo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--err.txt";#BSUB -M 16000;#BSUB -R select[mem>16000] -R rusage[mem=16000];#BSUB -R span[hosts=1];#BSUB -m fujitsu;echo "starting job";touch "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--started.touch";ulimit -c 0;echo "hostname:";hostname;echo "number of cores:";nproc;echo "total RAM:";head -1 /proc/meminfo;xvfb-run -a /g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" "/g/almf/software/scripts/cluster/fiji_devel/examples/data/im2.png";echo "job finished"> in cluster <phpc_cluster> Done
+
+Job <#!/bin/bash;#BSUB -oo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--out.txt";#BSUB -eo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--err.txt";#BSUB -M 16000;#BSUB -R select[mem>16000] -R rusage[mem=16000];#BSUB -R span[hosts=1];#BSUB -m fujitsu;echo "starting job";touch "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--started.touch";ulimit -c 0;echo "hostname:";hostname;echo "number of cores:";nproc;echo "total RAM:";head -1 /proc/meminfo;xvfb-run -a /g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" "/g/almf/software/scripts/cluster/fiji_devel/examples/data/im2.png";echo "job finished"> was submitted from host <submaster1> by user <tischer> in cluster <phpc_cluster>.
+Job was executed on host(s) <computef-017>, in queue <medium_priority>, as user <tischer> in cluster <phpc_cluster>.
+</home/tischer> was used as the home directory.
+</home/tischer> was used as the working directory.
+Started at Tue Jul 12 14:07:00 2016
+Results reported on Tue Jul 12 14:07:14 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -oo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--out.txt"
+#BSUB -eo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--err.txt"
+#BSUB -M 16000
+#BSUB -R select[mem>16000] -R rusage[mem=16000]
+#BSUB -R span[hosts=1]
+#BSUB -m fujitsu
+echo "starting job"
+touch "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--started.touch"
+ulimit -c 0
+echo "hostname:"
+hostname
+echo "number of cores:"
+nproc
+echo "total RAM:"
+head -1 /proc/meminfo
+xvfb-run -a /g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" "/g/almf/software/scripts/cluster/fiji_devel/examples/data/im2.png"
+echo "job finished"
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   15.71 sec.
+    Total Requested Memory :                     16000.00 MB
+    Delta Memory :                               -
+
+The output (if any) follows:
+
+starting job
+hostname:
+computef-017
+number of cores:
+48
+total RAM:
+MemTotal:       264228936 kB
+Opening a file:
+/g/almf/software/scripts/cluster/fiji_devel/examples/data/im2.png
+job finished
+
+
+PS:
+
+Read file </g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_2--err.txt> for stderr output of this job.
+

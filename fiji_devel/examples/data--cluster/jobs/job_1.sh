@@ -1,10 +1,12 @@
 #!/bin/bash
-#BSUB -oo "/g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data--cluster/log/job_1--out.txt"
-#BSUB -eo "/g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data--cluster/log/job_1--err.txt"
-#BSUB -M 8000
-#BSUB -R select[mem>8000] -R rusage[mem=8000]
+#BSUB -oo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_1--out.txt"
+#BSUB -eo "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_1--err.txt"
+#BSUB -M 16000
+#BSUB -R select[mem>16000] -R rusage[mem=16000]
+#BSUB -R span[hosts=1]
+#BSUB -m fujitsu
 echo "starting job"
-touch "/g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data--cluster/log/job_1--started.touch"
+touch "/g/almf/software/scripts/cluster/fiji_devel/examples/data--cluster/log/job_1--started.touch"
 ulimit -c 0
 echo "hostname:"
 hostname
@@ -12,5 +14,5 @@ echo "number of cores:"
 nproc
 echo "total RAM:"
 head -1 /proc/meminfo
-xvfb-run -a "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" "/g/almf/software/scripts/cluster/cluster--fiji--20151118/test--cluster/macro_with_arguments.ijm" "arg1 arg2 /g/almf/software/scripts/cluster/cluster--fiji--20151118/examples/data/im1.png"
+xvfb-run -a /g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" "/g/almf/software/scripts/cluster/fiji_devel/examples/data/im1.png"
 echo "job finished"
