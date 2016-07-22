@@ -121,3 +121,40 @@ The scripts are hosted on: /g/almf/software/scripts/cluster
 
 ```python-2.7 /g/almf/software/scripts/cluster/make_fiji_jobs_LSF.py --memory 16000 --xvfb "xvfb-run -a" --software "/g/emcf/software/Fiji/Fiji.app/ImageJ-linux64 -batch" --script "/g/almf/software/scripts/cluster/fiji_devel/examples/macro_1image.ijm" --input_dir "/g/almf/software/scripts/cluster/fiji_devel/examples/data"```
 
+### Running CellProfiler on the EMBL compute cluster
+
+Note that the EMBL compute cluster only has access to 'tier1' file-servers
+
+#### Configure your pipeline
+
+- open a terminal window (on Windows use Cygwin, on a Mac just the normal one)
+
+```ssh -Y YOUR_USER_NAME@submaster1```
+- it may ask you a question, if so, answer: yes
+- enter your password
+- now you are on the submaster computer, next you run CellProfiler as an interactive cluster job:
+```bsub -XF -Is CellProfiler-2.0.11047```
+- it may ask you a question, if so, answer: yes
+- you may have to enter your password again
+- the CellProfiler GUI should open
+- if it asks you to download new versions say SKIP THIS VERSION
+- load your pipeline (it has to be on a tier1 network drive, e.g. on /g/almfscreen/username)
+- in the __LoadImages__ module at the bottom of the settings: __Input image file location__: __Elsewhere__ select the folder with your image data
+- using CellProfiler's __[Test > Start Test Run]__ adapt all necessary module paramters
+- specifically, in the last module __CreateBatchFiles__ select an __Output folder path__ on your server  
+- __[Analyze images]__
+  - this will not yet analyse your data but just create the __Batch_data.mat__ file to be spawn on the cluster (s. b.)
+  - remember where the __Batch_data.mat__ file is stored (you'll need it soon)
+- Exit CellProfiler
+
+#### Distribute jobs on the cluster
+
+- you have to be on __submaster1__ (s.a.)
+  - (tech note: you need the graphics forwarding '-Y' also for this step) 
+- execute: ```/g/almf/software/CP2C/runrunLSF.sh --pipeline /g/YOUR_FOLDER_LOCATION/Batch_data.mat``
+  - this will prepare the jobs but not run them yet.
+  - now, follow all instructions printed to the terminal window (i.e. copy and paste and execute some commands), to:
+    - spawn the jobs
+    - monitor the jobs
+    - concatenate the output tables
+
