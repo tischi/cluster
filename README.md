@@ -151,7 +151,7 @@ Note that the EMBL compute cluster only has access to 'tier1' file-servers
 
 - you have to be on __submaster1__ (s.a.)
   - (tech note: you need the graphics forwarding '-Y' also for this step) 
-- execute: ```/g/almf/software/CP2C/runrunLSF.sh --pipeline /g/YOUR_FOLDER_LOCATION/Batch_data.mat``
+- execute: ```/g/almf/software/scripts/cluster/make_cellprofiler_jobs_LSF.sh --software CellProfiler-2.0.11047 --script /g/YOUR_FOLDER_LOCATION/Batch_data.mat``
   - this will prepare the jobs but not run them yet.
   - now, follow all instructions printed to the terminal window (i.e. copy and paste and execute some commands), to:
     - spawn the jobs
