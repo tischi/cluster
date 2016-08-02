@@ -1,0 +1,1 @@
+/g/almf/software/scripts/cluster/make_cellprofiler_jobs_LSF.sh --software CellProfiler-2.0.11047 --script /g/almf/software/scripts/cluster/cellprofiler_devel/Batch_data.mat

@@ -62,8 +62,9 @@ if __name__ == '__main__':
         totalNumberOfJobs = len(files)
         
         files = os.listdir(logdir)
-        d = {'started':[], 'not_started':[], 'out_file_incomplete_start':[], 'out_file_incomplete_end':[],  'jvm_dir_not_found':[], 'output':[], 'toucherror':[], 'libjvm_not_found':[], 'libjvm_found':[], 'libjvmerror':[], 'successful':[], 'caterror': [], 'failed':[], 'withError':[], 'unfinished':[], 'jobnumbers':[]}
-               
+        d = {'started':[], 'Error in (MATLAB)':[], 'not_started':[], 'PIL':[], 'out_file_incomplete_start':[], 'out_file_incomplete_end':[],  'jvm_dir_not_found':[], 'output':[], 'toucherror':[], 'libjvm_not_found':[], 'libjvm_found':[], 'libjvmerror':[], 'successful':[], 'caterror': [], 'failed':[], 'withError':[], 'unfinished':[], 'jobnumbers':[]}
+          
+
         for f in files:
             if ("--started" in f) or ("--err.txt" in f):
                 job = f.split("--")[0]
@@ -148,15 +149,24 @@ if __name__ == '__main__':
                     if len(file(jobErrPath,"r").readlines())>0:
                         d['withError'].append(job)
                         errFileContent = file(jobErrPath,"r").read()
-                        if "libjvm.so" in errFileContent:
+                        if "Error in" in errFileContent:
+                            d['failed'].append(job)
+                            d['Error in (MATLAB)'].append(job)
+                        elif "cannot" in errFileContent:
+                            d['failed'].append(job)
+                        elif "error" in errFileContent:
+                            d['failed'].append(job)    
+                        elif "Killed" in errFileContent:
+                            d['failed'].append(job)     
+                        elif "libjvm.so" in errFileContent:
                             # print job,"has libjvm error"
                             d['libjvmerror'].append(job)
                         elif "at: write error:" in errFileContent:
                             # print job,"has cat error"
-                            d['caterror'].append([job,jobNum,jobNode])
+                            d['caterror'].append(job)
                         elif "cannot touch" in errFileContent:
                             # print job,"has touch error"
-                            d['toucherror'].append([job,jobNum,jobNode])
+                            d['toucherror'].append(job)
                         else:
                             a = 1
                             # print job,"has unkown error message"
@@ -185,17 +195,20 @@ if __name__ == '__main__':
         print "not started: "+str(len(d['not_started'])) 
         print "failed:      "+str(len(d['failed'])) 
         print ""
-        print "errors and warnings (please report to ALMF staff if non-zero):"  
-        print "  failed: "+str(len(d['failed'])) 
-        print "  have content in error file: "+str(len(d['withError']))
-        #print "    cat error:      "+str(len(d['caterror'])) 
-        #print "    touch error:    "+str(len(d['toucherror'])) 
-        #print "    libjvm-warning: "+str(len(d['libjvmerror'])) 
-        #print "  libjvm not found warning: "+str(len(d['libjvm_not_found'])) 
-        #print "  jvm_dir not found warning: "+str(len(d['jvm_dir_not_found'])) 
-        #print "  using PIL instead of Bioformats: "+str(len(d['PIL'])) 
-        #print "  out_file_incomplete_start: "+str(len(d['out_file_incomplete_start'])) 
-        print "  out_file_incomplete_end: "+str(len(d['out_file_incomplete_end'])) 
+        #print "errors and warnings (please report to ALMF staff if non-zero):"  
+        #print "  failed: "+str(len(d['failed'])) 
+        print "have content in error file: "+str(len(d['withError']))
+        
+        if len(d['withError'])>0:
+          print "  error in (MATLAB):"+str(len(d['Error in (MATLAB)']))
+          print "  write error (full home dir):      "+str(len(d['caterror'])) 
+          print "  touch error:    "+str(len(d['toucherror'])) 
+          print "  libjvm-warning: "+str(len(d['libjvmerror'])) 
+          print "  libjvm not found warning: "+str(len(d['libjvm_not_found'])) 
+          print "  jvm_dir not found warning: "+str(len(d['jvm_dir_not_found'])) 
+          print "  using PIL instead of Bioformats: "+str(len(d['PIL'])) 
+          print "  out_file_incomplete_start: "+str(len(d['out_file_incomplete_start'])) 
+          print "  out_file_incomplete_end: "+str(len(d['out_file_incomplete_end'])) 
         
                          
         #if len(d['libjvm_not_found'])>0:

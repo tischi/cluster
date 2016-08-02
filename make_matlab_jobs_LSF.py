@@ -55,12 +55,12 @@ def make_jobs(args):
     # how to make this nicer?
     xvfb = args.xvfb
     software = args.software
-    script = args.script # not needed as "software" is software and script compiled into one file
+    #script = args.script # not needed as "software" is software and script compiled into one file
     script_arguments = args.script_arguments
     input_dir = args.input_dir # /scratch/Nils/firstframe/ and then /scratch/Nils/allframes/
-    output_dir = args.output_dir # just for internal use
-    batch_size = args.batch_size
-    max_jobs = args.max_jobs
+    #output_dir = args.output_dir # just for internal use
+    #batch_size = args.batch_size
+    #max_jobs = args.max_jobs
     memory = args.memory
     queue = args.queue
     host_group = args.host_group
@@ -113,7 +113,8 @@ def make_jobs(args):
                 '#BSUB -oo "{}/job_{}--out.txt"'.format(log_dir,iJob+1),
                 '#BSUB -eo "{}/job_{}--err.txt"'.format(log_dir,iJob+1),
                 '#BSUB -M {}'.format(memory),
-                '#BSUB -R select[mem>{}] -R rusage[mem={}]'.format(memory,memory)
+                '#BSUB -R select[mem>{}] -R rusage[mem={}]'.format(memory,memory),
+                '#BSUB -R span[hosts=1]'
                 ]
         txt = '\n'.join(txt)
         txt = txt + '\n'
@@ -256,8 +257,10 @@ if __name__ == '__main__':
     #                    default=NUM_JOBS_MAX)
     parser.add_argument('--queue', dest='queue', default='',
                         help='select a specific queue to submit your jobs to; this selects a subset of the available nodes with specific properties, e.g. "bigmem" selects nodes with a lot of memory.') # bigmem
-    parser.add_argument('--host_group', dest='host_group', default='intelavx',
-                           help='select a specific group of nodes to submit your jobs to.') 
+    parser.add_argument('--host_group', dest='host_group', default='fujitsu',
+                        help='select a specific group of nodes to submit your jobs to.')
+                        
+                        
 
                     
     args = parser.parse_args()
