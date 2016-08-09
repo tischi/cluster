@@ -49,15 +49,15 @@ if __name__ == '__main__':
         job_dir = args.job_dir.rstrip(os.path.sep) # remove trailing slash if exists
     
         
-        print 'Spawning jobs...'
+        print('Spawning jobs...')
         run_jobs(job_dir, args.bsub_options)
         
         log_dir = os.path.join(os.path.split(job_dir)[0],"log")
 		
-        print ''
-        print 'Command to check and resubmit failed jobs:'
-        print 'python-2.7 /g/almf/software/scripts/cluster/check_jobs_LSF.py --log_dir',log_dir
-        print ''
+        print('')
+        print('Command to check and resubmit failed jobs:')
+        print('python-2.7 /g/almf/software/scripts/cluster/check_jobs_LSF.py --log_dir "{}"'.format(log_dir))
+        print('')
         
                                
     except:
