@@ -274,7 +274,7 @@ if __name__ == '__main__':
         print("")
         print("for concatenation of (CellProfiler) output tables copy and paste below command (you may have to adapt --tabledir and --table_ending):")
         print("")
-        cmd = "python-2.7 /g/almf/software/scripts/cluster/concat_tables.py --table_ending image.csv --tabledir "
+        cmd = 'python-2.7 /g/almf/software/scripts/cluster/concat_tables.py --table_ending "image.csv" --tabledir '
         tmp = logdir.split(os.sep)[-2]
         tmp = tmp.split("--")[0]
         tmp1 = tmp + "--cp/tables"
