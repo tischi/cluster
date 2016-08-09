@@ -271,6 +271,16 @@ if __name__ == '__main__':
                 for job in d['not_started']:
                   resumbitJob(logdir,jobdir,job)
         
+        print("")
+        print("for concatenation of (CellProfiler) output tables copy and paste below command (you may have to adapt --tabledir and --table_ending):")
+        print("")
+        cmd = "python-2.7 /g/almf/software/scripts/cluster/concat_tables.py --table_ending image.csv --tabledir "
+        tmp = logdir.split(os.sep)[-2]
+        tmp = tmp.split("--")[0]
+        tmp1 = tmp + "--cp/tables"
+        tmp = logdir.rpartition("/")[0].rpartition("/")[0]
+        tabledir = tmp + "/" + tmp1
+        print(cmd+'"'+tabledir+'"')
                     
         sys.stdout.flush()
        
