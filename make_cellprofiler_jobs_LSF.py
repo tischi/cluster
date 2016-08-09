@@ -328,7 +328,7 @@ def make_jobs(args):
         script_file.close()
         
         # make script executable
-        os.system('chmod a+x {}'.format(script_name))
+        os.system('chmod a+x "{}"'.format(script_name))
 
     return job_dir, len(jobStartImages)
 
@@ -382,13 +382,13 @@ if __name__ == '__main__':
     job_dir, nJobs = make_jobs(args)
     
     # print some information about the jobs
-    print ''
-    print 'Number of jobs:',nJobs
-    print 'Job directory:',job_dir
-    print ''
-    print 'Command to spawn jobs on cluster:'
-    print 'python-2.7 /g/almf/software/scripts/cluster/run_jobs_LSF.py --job_dir',job_dir
-    print ''
+    print('')
+    print('Number of jobs:',nJobs)
+    print('Job directory:',job_dir)
+    print('')
+    print('Command to spawn jobs on cluster:')
+    print('python-2.7 /g/almf/software/scripts/cluster/run_jobs_LSF.py --job_dir "{}"'.format(job_dir))
+    print('')
 
 
     # below is necessary to finish the script
